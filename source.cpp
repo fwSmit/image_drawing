@@ -9,10 +9,13 @@ int randInt(int min, int max)
     return rand() % max + min;
 }
 
+
 int main()
 {
     int i = 0;
     int rad = 7;
+    int size = 50;
+    int decrement = 1;
 
     const string file_name = "rabbit.jpg";
     sf::Image img;
@@ -23,12 +26,16 @@ int main()
     sf::RenderWindow window(sf::VideoMode(img.getSize().x, img.getSize().y), "SFML works!");
     window.setVerticalSyncEnabled(1);
 
-    sf::CircleShape shape(rad);
-    vector<sf::CircleShape> circles;
-    shape.setOrigin(shape.getRadius(),shape.getRadius());
-    shape.setFillColor(sf::Color::Green);
+    //sf::CircleShape shape(rad);
+    //vector<sf::CircleShape> circles;
+    //shape.setOrigin(shape.getRadius(),shape.getRadius());
+    //shape.setFillColor(sf::Color::Green);
     //cout << img.getSize().x << " " << img.getSize().y << endl;
 
+
+    sf::RectangleShape shape(sf::Vector2f (size, size));
+    shape.setOrigin(0.5 * shape.getSize().x, 0.5 * shape.getSize().y * 0.5);
+    vector<sf::RectangleShape> circles;
 
     while (window.isOpen()) {
         sf::Event event;
@@ -39,16 +46,19 @@ int main()
 
         window.clear();
 
-        if(i > 10000 && rad > 1) {
+        if(i > 10 && rad > 1 && size > decrement) {
             i = 0;
             cout << "radius change" << endl;
-            rad -= 1;
-            shape.setRadius(rad);
+            //rad -= 1;
+            size -= decrement;
+            cout << size << endl;
+            shape.setSize(sf::Vector2f(size, size));
+            //shape.setRadius(rad);
         }
-        for(int i = 0; i < 400; i ++) {
+        for(int i = 0; i < 100; i ++) {
             sf::Vector2i pos;
-            pos.x = randInt(0, window.getSize().x);
-            pos.y = randInt(0, window.getSize().y);
+            pos.x = size* randInt(0, window.getSize().x/size);
+            pos.y = size* randInt(0, window.getSize().y/size);
             //sf::Vector2i pos = sf::Mouse::getPosition(window);
             //cout << pos.x << " " << pos.y << endl;
             if(pos.x >= 0 && pos.x < img.getSize().x && pos.y >= 0 && pos.y < img.getSize().y) {
@@ -61,6 +71,9 @@ int main()
             }else{
                 shape.setFillColor(sf::Color::Transparent);
             }
+            //shape.left = pos.x + 0.5 * shape.width;
+            //shape.top = pos.y + 0.5 * shape.height;
+
             shape.setPosition(sf::Vector2f(pos));
             circles.push_back(shape);
         }
