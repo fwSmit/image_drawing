@@ -18,7 +18,7 @@ class Project_imageDrawing : Project
     protected:
 
     private:
-		int radius = 10;
+		int radius = 5;
 		std::string file_name;
 		std::vector<sf::CircleShape> circles;
 		sf::CircleShape shape;
