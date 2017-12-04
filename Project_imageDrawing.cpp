@@ -19,6 +19,10 @@ int Project_imageDrawing::randInt(int min, int max){
 
 Project_imageDrawing::~Project_imageDrawing(){}
 
+void Project_imageDrawing::stop(){
+	circles.clear();
+}
+
 void Project_imageDrawing::loop(){
 		for(int i = 0; i < 100; i ++) {
             sf::Vector2i pos;

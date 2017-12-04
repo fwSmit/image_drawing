@@ -13,6 +13,8 @@ class Project_imageDrawing : Project
         Project_imageDrawing(sf::RenderWindow& _window);
         virtual ~Project_imageDrawing();
         void loop();
+		void start();
+		void stop();
 		int randInt(int min, int max);
 
     protected:
