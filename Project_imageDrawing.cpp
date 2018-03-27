@@ -3,7 +3,7 @@
 #include <assert.h>
 
 Project_imageDrawing::Project_imageDrawing(sf::RenderWindow& _window) : Project(_window){
-    file_name = "C:/Users/Friso/image_drawing/images/rabbit.jpg";
+    file_name = "rabbit.jpg";
     std::cout << file_name << std::endl;
     assert(img.loadFromFile(file_name));
 	shape.setRadius(radius);
