@@ -1,9 +1,11 @@
 cmake_minimum_required(VERSION 3.9)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
+message("module path is: " +  "${CMAKE_MODULE_PATH}")
 project (image)
 
 
-add_library (image_drawing Project_imageDrawing.cpp)
-#add_executable(image_drawing source.cpp Project.cpp Project_imageDrawing.cpp)
+#add_library (image_drawing Project_imageDrawing.cpp)
+add_executable(image_drawing source.cpp Project.cpp Project_imageDrawing.cpp)
 
 target_link_libraries(image_drawing dependencies)
 include_directories(${PROJECT_SOURCE_DIR})
