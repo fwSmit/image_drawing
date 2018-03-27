@@ -3,7 +3,8 @@
 #include <assert.h>
 
 Project_imageDrawing::Project_imageDrawing(sf::RenderWindow& _window) : Project(_window){
-    file_name = "rabbit.jpg";
+    file_name = "C:/Users/Friso/image_drawing/images/rabbit.jpg";
+    std::cout << file_name << std::endl;
     assert(img.loadFromFile(file_name));
 	shape.setRadius(radius);
     shape.setOrigin(shape.getRadius(),shape.getRadius());
@@ -24,7 +25,7 @@ void Project_imageDrawing::stop(){
 }
 
 void Project_imageDrawing::loop(){
-		for(int i = 0; i < 100; i ++) {
+	for(int i = 0; i < 100; i ++) {
             sf::Vector2i pos;
             //pos.x = size* randInt(0, window.getSize().x/size);
             //pos.y = size* randInt(0, window.getSize().y/size);
