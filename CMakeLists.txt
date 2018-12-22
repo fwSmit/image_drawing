@@ -1,23 +1,48 @@
-cmake_minimum_required(VERSION 3.9)
+cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
-message("module path is: " +  "${CMAKE_MODULE_PATH}")
-project (image)
+set (CMAKE_CXX_STANDARD 14)
+# if ( CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
+message("turning on warnings")
+set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall -Wextra")
+# else()
+	# message("can't turn on warnings")
+	# message(${CMAKE_CXX_COMPILER})
+# endif()
 
 
-#add_library (image_drawing Project_imageDrawing.cpp)
-add_executable(image_drawing source.cpp Project.cpp Project_imageDrawing.cpp)
+project (image_drawing_project CXX)
 
-#target_link_libraries(image_drawing dependencies)
-#include_directories(${PROJECT_SOURCE_DIR})
-#include_directories(${CMAKE_SOURCE_DIR}/dependencies/include)
+#file globing
+file(GLOB_RECURSE sources src/*.cpp src/*.h)
+file(GLOB_RECURSE data resources/*)
 
-# Detect and add SFML
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
-#Find any version 2.X of SFML
-#See the FindSFML.cmake file for additional details and instructions
-find_package(SFML 2 REQUIRED network audio graphics window system)
-if(SFML_FOUND)
-  include_directories(${SFML_INCLUDE_DIR})
-  target_link_libraries(image_drawing ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
+add_executable(image_drawing ${sources} ${data})
+
+#copy resources to build directory
+file(COPY ${data} DESTINATION resources)
+
+#armadillo library
+find_package(Armadillo REQUIRED)
+
+#include the necessary libraries
+find_package(SFML 2 REQUIRED system window graphics)
+find_package(TGUI REQUIRED)
+
+if(NOT SFML_FOUND)
+    message(FATAL_ERROR "Could not find SFML")
 endif()
 
+if(NOT TGUI_FOUND)
+    message(FATAL_ERROR "Could not find TGUI")
+endif()
+
+if(NOT ARMADILLO_FOUND)
+	message(FATAL_ERROR "Could not find armadillo")
+endif()
+
+include_directories(${SFML_INCLUDE_DIR})
+include_directories(${TGUI_INCLUDE_DIR})
+include_directories(${ARMADILLO_INCLUDE_DIRS})
+
+target_link_libraries(image_drawing ${SFML_LIBRARIES} ${TGUI_LIBRARY} ${ARMADILLO_LIBRARIES})
