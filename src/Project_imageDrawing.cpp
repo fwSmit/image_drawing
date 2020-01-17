@@ -25,7 +25,7 @@ void Project_imageDrawing::stop(){
 }
 
 void Project_imageDrawing::loop(){
-	for(int i = 0; i < 100; i ++) {
+	for(int i = 0; i < n_dots_per_frame; i ++) {
             sf::Vector2i pos;
             //pos.x = size* randInt(0, window.getSize().x/size);
             //pos.y = size* randInt(0, window.getSize().y/size);

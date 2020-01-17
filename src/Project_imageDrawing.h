@@ -21,6 +21,7 @@ class Project_imageDrawing : Project
 
     private:
 		int radius = 5;
+		int n_dots_per_frame = 20;
 		std::string file_name;
 		std::vector<sf::CircleShape> circles;
 		sf::CircleShape shape;

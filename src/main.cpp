@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+	sf::RenderWindow window(sf::VideoMode(1920*0.7, 1080*0.7), "SFML works!");
 	Project_imageDrawing pr(window);
 	    while (window.isOpen())
     {
